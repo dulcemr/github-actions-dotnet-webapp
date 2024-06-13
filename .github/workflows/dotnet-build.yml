@@ -2,7 +2,7 @@ name: dotnet example
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ main ]
   schedule:
     - cron: '0 * * * *'  # Executa a cada hora
 
