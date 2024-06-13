@@ -1,0 +1,44 @@
+name: dotnet example
+
+on:
+  push:
+    branches: [ $default-branch ]
+  schedule:
+    - cron: '0 * * * *'  # Executa a cada hora
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4  # Action pré-existente
+
+      - name: Run a one-line script
+        run: echo Hello from dotnet webapp
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2  # Action pré-existente
+        with:
+            node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+  task_demo:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Action pré-existente
+
+    - name: Execute custom script
+      run: |
+        echo "Running scheduled task"
+        node scripts/task-demo.js  # Script personalizado
+        
+        
+      
